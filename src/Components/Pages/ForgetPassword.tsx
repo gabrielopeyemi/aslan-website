@@ -12,7 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Copyright from './../Layer/Copyright'
+import Copyright from './../Layer/Copyright';
+import * as M from './../../Assets/MainStyled';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -63,12 +64,12 @@ export default function SignIn() {
             autoComplete="email"
             autoFocus
           />
-          <div
+          <M.MainBtnContainer
             className='btn btn-block btn-main'
             onClick={handleSubmit}
           >
             Sign In
-          </div>
+          </M.MainBtnContainer>
           <br/>
           <Grid container>
             <Grid item xs>

@@ -1,11 +1,9 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import {Link as ALink} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -14,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from '../Layer/Copyright';
-
+import * as M from '../../Assets/MainStyled';
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -41,7 +39,6 @@ export default function SignIn() {
       console.log('Login')
       window.location.href = '/dashboard';
   } 
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -79,12 +76,12 @@ export default function SignIn() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <div
+          <M.MainBtnContainer
             className='btn btn-block btn-main'
             onClick={handleSubmit}
           >
             Sign In
-          </div>
+          </M.MainBtnContainer>
           <br/>
           <Grid container>
             <Grid item xs>

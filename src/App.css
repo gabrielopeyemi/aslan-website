@@ -4,13 +4,3 @@ a{
 a:hover {
   text-decoration: none;
 }
-.btn-main{
-  background-color: #639;
-  color: white;
-  border: 1px solid #639;
-}
-.btn-main:hover{
-  background-color: #fff;
-  color: #639;
-  border: 1px solid #639;
-}
