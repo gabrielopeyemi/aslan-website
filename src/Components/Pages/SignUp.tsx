@@ -48,7 +48,8 @@ export default function SignUp() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
+    <>
+    <Container component="main" maxWidth="xs" style={{backgroundColor: '#fff', paddingBottom: '20px'}}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -128,9 +129,10 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
+    </Container>
       <Box mt={5}>
         <Copyright />
       </Box>
-    </Container>
+    </>
   );
 }

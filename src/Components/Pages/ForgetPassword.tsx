@@ -48,48 +48,50 @@ export default function SignIn() {
   }
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-        ForgetPassword
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <M.MainBtnContainer
-            className='btn btn-block btn-main'
-            onClick={handleSubmit}
-          >
-            Sign In
-          </M.MainBtnContainer>
-          <br/>
-          <Grid container>
-            <Grid item xs>
-              <ALink to="/" >
-                I remember my password
-              </ALink>
+    <>
+      <Container component="main" maxWidth="xs" style={{backgroundColor: '#fff', paddingBottom: '20px'}}>
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+          ForgetPassword
+          </Typography>
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <M.MainBtnContainer
+              className='btn btn-block btn-main'
+              onClick={handleSubmit}
+            >
+              Sign In
+            </M.MainBtnContainer>
+            <br/>
+            <Grid container>
+              <Grid item xs>
+                <ALink to="/" >
+                  I remember my password
+                </ALink>
+              </Grid>
+              <Grid item>
+              </Grid>
             </Grid>
-            <Grid item>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+          </form>
+        </div>
+      </Container>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
+    </>
   );
 }

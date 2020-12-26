@@ -18,7 +18,7 @@ const handleLogin = () =>{
 
 export const mainListItems: any = (
   <div>
-    <Link to='/'>
+    <Link to='/dashboard'>
     <ListItem button>
       <ListItemIcon>
         <DashboardIcon />
