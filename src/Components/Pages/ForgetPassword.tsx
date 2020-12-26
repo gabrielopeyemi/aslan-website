@@ -44,7 +44,7 @@ export default function SignIn() {
       swal("Successful!", "You clicked the button!", "success");
       setTimeout(()=>{
         window.location.href = '/dashboard';
-      }, 3000);
+      }, 4000);
   }
 
   return (
