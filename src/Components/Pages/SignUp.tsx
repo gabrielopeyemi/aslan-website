@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from '../Layer/Copyright';
 import * as M from './../../Assets/MainStyled';
+import swal from 'sweetalert';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -40,6 +41,10 @@ export default function SignUp() {
   const handleSubmit =():any =>{
       console.log('signup')
       window.location.href = '/dashboard';
+      swal("Successful!", "You clicked the button!", "success");
+      setTimeout(()=>{
+        window.location.href = '/dashboard';
+      }, 3000);
   }
 
   return (

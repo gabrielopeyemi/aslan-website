@@ -11,6 +11,11 @@ import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import { Link } from 'react-router-dom';
 
+const handleLogin = () =>{
+  console.log('log out');
+  window.location.href = '/';
+}
+
 export const mainListItems: any = (
   <div>
     <Link to='/'>
@@ -59,7 +64,7 @@ export const mainListItems: any = (
 
 export const secondaryListItems: any = (
   <div>
-    <ListItem button>
+    <ListItem button onClick={handleLogin}>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
