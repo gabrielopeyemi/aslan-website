@@ -9,6 +9,7 @@ import SignUp from './Pages/SignUp';
 import Dashboard from './Pages/Dashboard';
 import ForgetPassword from './Pages/ForgetPassword';
 import Tracking from './Pages/Tracking';
+import AddTransaction from './Pages/AddTransaction';
 export default function MainRoutes() {
   return (
     <Router>
@@ -31,6 +32,9 @@ export default function MainRoutes() {
           </Route>
           <Route exact path='/tracking'>
             <Tracking />
+          </Route>
+          <Route exact path='/addtransaction'>
+            <AddTransaction />
           </Route>
         </Switch>
       </div>

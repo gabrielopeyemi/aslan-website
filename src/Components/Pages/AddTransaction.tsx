@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState }  from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,19 +14,14 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import {Link} from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './../Layer/listItems';
-import Chart from './../Layer/Chart';
-import Deposits from './../Layer/Deposits';
-import Orders from '../Layer/Orders';
-import Copyright from '../Layer/Copyright';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import Tooltip from '@material-ui/core/Tooltip';
-
+import { mainListItems, secondaryListItems } from '../Layer/listItems';
+import Chart from '../Layer/Chart';
+import TextField from '@material-ui/core/TextField';
+import AddtransactionForm from './../Layer/AddTransactioForm';
+import Copyright from './../Layer/Copyright';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -113,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function AddTransaction() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -139,7 +134,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+          AddTransaction
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -184,17 +179,10 @@ export default function Dashboard() {
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Orders />
+                <AddtransactionForm />
               </Paper>
             </Grid>
           </Grid>
-          <Tooltip title="Add" aria-label="add">
-            <Link to='/addtransaction'>
-              <Fab color="secondary" className={classes.absolute} onClick={()=> console.log('get form')}>
-                  <AddIcon />
-              </Fab>
-            </Link>
-        </Tooltip>
           <Box pt={4}>
             <Copyright />
           </Box>
