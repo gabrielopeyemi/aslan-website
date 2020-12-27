@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: '#000'
   },
   drawerPaper: {
     position: 'relative',
@@ -127,7 +128,7 @@ export default function Tracking() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar style={{backgroundColor: '#639'}} position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar style={{backgroundColor: '#fff'}} position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
@@ -139,11 +140,11 @@ export default function Tracking() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            Aslan Logistics
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
+              <NotificationsIcon color='action'/>
             </Badge>
           </IconButton>
         </Toolbar>
@@ -169,30 +170,16 @@ export default function Tracking() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
-            {/* <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid> */}
-            {/* Recent Deposits */}
-            {/* <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid> */}
-            {/* Recent Orders */}
             <Grid item xs={12}>
+            <Typography variant="h4" component="h4">
+              Tracking
+            </Typography>
+              <br/>
               <Paper className={classes.paper}>
                 <Orders />
               </Paper>
             </Grid>
           </Grid>
-          <Tooltip title="Add" aria-label="add">
-            <Fab color="secondary" className={classes.absolute} onClick={()=> console.log('get form')}>
-                <AddIcon />
-            </Fab>
-        </Tooltip>
           <Box pt={4}>
             <Copyright />
           </Box>

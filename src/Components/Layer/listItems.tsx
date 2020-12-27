@@ -15,10 +15,11 @@ const handleLogin = () =>{
   console.log('log out');
   window.location.href = '/';
 }
+const color = "#757575"
 
 export const mainListItems: any = (
   <div>
-    <Link to='/dashboard'>
+    <Link to='/dashboard' style={{color: color}}>
     <ListItem button>
       <ListItemIcon>
         <DashboardIcon />
@@ -26,7 +27,7 @@ export const mainListItems: any = (
       <ListItemText primary="Dashboard" />
       </ListItem>
     </Link>
-    <Link to='/tracking'>
+    <Link to='/tracking'  style={{color: color}}>
     <ListItem button>
       <ListItemIcon>
         <BarChartIcon />
@@ -64,7 +65,7 @@ export const mainListItems: any = (
 
 export const secondaryListItems: any = (
   <div>
-    <ListItem button onClick={handleLogin}>
+    <ListItem button onClick={handleLogin}  style={{color: color}}>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
