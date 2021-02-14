@@ -8,7 +8,8 @@ import { Grid } from '@material-ui/core';
 import swal from 'sweetalert';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
-
+import { LOCALSTORAGE, MAINURL } from '../../Assets/Data';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({
@@ -50,8 +51,20 @@ export default function AddtransactionForm (){
     const [recieverStatus, setRecieverStatus] = useState<boolean>(false);
     const [cargoStatus, setCargoStatus] = useState<boolean>(false);
     const [currency, setCurrency] = React.useState('EUR');
-    const [cargoName, setCargoName] = useState<string>('');
     const [open, setOpen] = React.useState(false);
+
+
+    const [senderName, setSenderName] = useState<string>('gabriel');
+    const [senderPhoneNumber, setSenderPhoneNumber] = useState<String>('');
+    const [senderAddress, setSenderAddress] = useState<string>('');
+    const [recieverName, setRecieverName] = useState<string>('')
+    const [recieverPhoneNumber, setRecieverPhoneNumber] = useState<string>('');
+    const [recieverAddress, setRecieverAddress] = useState<string>('');
+    
+
+    const [cargoName, setCargoName] = useState<string>('');
+    const [cargoWeight, setCargoWeight] = useState<string>('')
+    const [cargoType, setCargoType] = useState<string>('')
 
 
     const handleOpenReciever = (): void => {
@@ -71,17 +84,57 @@ export default function AddtransactionForm (){
     };
     const handleSubmit = (): void =>{
         setOpen(!open);
-        console.log('Submit');
-        setTimeout(()=> {
-            if (cargoName === ''){
-                setTimeout(()=> {
+        console.log(`
+        Submitted:
+            ${senderName}
+            ${senderPhoneNumber}
+            ${senderAddress}
+            ${recieverName}
+            ${recieverPhoneNumber}
+            ${recieverAddress}
+            ${cargoName}
+            ${cargoWeight}
+            ${cargoType} 
+        `);
+        // const admin = JSON.parse(localStorage.getItem(LOCALSTORAGE.userDetails))._id;
+        console.log(`${MAINURL}/transactions/add-transactions`)
+        setTimeout(() => {
+            if (cargoName === '') {
+                setTimeout(() => {
                     setOpen(false);
                     swal("Added!", "Field not completely filled", "error");
                 }, 2000)
-            }else{
+            } else {
                 setOpen(false);
-                swal("Added!", `${cargoName} is added!`, "success");
-                window.location.href = '/dashboard';
+                try {
+                    axios.post(`${MAINURL}/transactions/add-transactons`, {
+                        senderName: senderName,
+                        senderID: Math.floor(Math.random() * 100000000),
+                        senderAddress: senderAddress,
+                        senderState: senderAddress,
+                        recieverName: recieverName,
+                        recieverID: Math.floor(Math.random() * 100000000),
+                        recieverAddress: recieverAddress,
+                        recieverState: senderAddress,
+                        cargoName: cargoName,
+                        cargoWeight: cargoWeight,
+                        cargoID: Math.floor(Math.random() * 100000000),
+                        cargoType: cargoType,
+                        vehicleID: 58793209,
+                    }).then((response: any) => {
+                        console.log(response.statusText);
+                        console.log(response.data.data);
+                        if (response.statusText === 'Created') {
+                            setTimeout(() => {
+                                window.location.href = '/dashboard';
+                            }, 4000)
+                        }
+                      })
+                } catch (err) {
+                    console.log(err)
+                }
+                // swal("Added!", `${cargoName} is added!`, "success");
+               
             }
         }, 3000)
     }
@@ -103,6 +156,7 @@ export default function AddtransactionForm (){
                     label="Name"
                     type="text"
                     autoComplete="current-text"
+                    onChange={(e:any):any => setSenderName(e.target.value)}
                 />
                 <br/>
                 <TextField
@@ -110,6 +164,7 @@ export default function AddtransactionForm (){
                     label="Phone Number"
                     type="text"
                     autoComplete="current-text"
+                    onChange={(e:any):any => setSenderPhoneNumber(e.target.value)}
                 />
                 <br/>
                 <TextField
@@ -117,20 +172,8 @@ export default function AddtransactionForm (){
                     label="Address"
                     type="text"
                     autoComplete="current-text"
-                />
-                <br/>
-                <TextField
-                    id="standard-text-input"
-                    label="Address"
-                    type="text"
-                    autoComplete="current-text"
-                />
-                <br/>
-                <TextField
-                    id="standard-text-input"
-                    label="text"
-                    type="text"
-                    autoComplete="current-text"
+                    onChange={(e:any):any => setSenderAddress(e.target.value)}
+
                 />
                 <br/>
                 <Grid container spacing={3} style={{marginTop: '30px'}}>
@@ -149,6 +192,7 @@ export default function AddtransactionForm (){
                     label="Name"
                     type="text"
                     autoComplete="current-text"
+                    onChange={(e:any):any => setRecieverName(e.target.value)}
                 />
                 <br/>
                 <TextField
@@ -156,6 +200,7 @@ export default function AddtransactionForm (){
                     label="Phone Number"
                     type="text"
                     autoComplete="current-text"
+                    onChange={(e:any):any => setRecieverPhoneNumber(e.target.value)}
                 />
                 <br/>
                 <TextField
@@ -163,6 +208,7 @@ export default function AddtransactionForm (){
                     label="Address"
                     type="text"
                     autoComplete="current-text"
+                    onChange={(e:any):any => setRecieverAddress(e.target.value)}
                 />
                 <br/>
                 <TextField
@@ -170,14 +216,15 @@ export default function AddtransactionForm (){
                     label="Address"
                     type="text"
                     autoComplete="current-text"
+                    onChange={(e:any):any => setRecieverAddress(e.target.value)}
                 />
-                <br/>
+                {/* <br/>
                 <TextField
                     id="standard-text-input"
                     label="text"
                     type="text"
                     autoComplete="current-text"
-                />
+                /> */}
                 <br/>
                 <Grid container spacing={3} style={{marginTop: '30px'}}>
                     <Grid item lg={6} >
@@ -198,7 +245,7 @@ export default function AddtransactionForm (){
                     label="Cargo Name"
                     type="text"
                     autoComplete="current-text"
-                    onChange={(event)=> setCargoName(event.target.value)}
+                    onChange={(event: any): any=> setCargoName(event.target.value)}
                 />
                 <br/>
                 <TextField
@@ -206,6 +253,8 @@ export default function AddtransactionForm (){
                     label="Cargo Weight"
                     type="text"
                     autoComplete="current-text"
+                    onChange={(e:any):any => setCargoWeight(e.target.value)}
+
                 />
                 <br/>
                 <TextField
@@ -213,6 +262,7 @@ export default function AddtransactionForm (){
                     label="Cargo Type"
                     type="text"
                     autoComplete="current-text"
+                    onChange={(e: any): any => setCargoType(e.target.value)}
                 />
                 <br/>
                 {/* <TextField

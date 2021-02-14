@@ -26,6 +26,7 @@ import Copyright from '../Layer/Copyright';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Tooltip from '@material-ui/core/Tooltip';
+import MainMap from './../Layer/Map';
 
 const drawerWidth = 240;
 
@@ -174,10 +175,7 @@ export default function Tracking() {
             <Typography variant="h4" component="h4">
               Tracking
             </Typography>
-              <br/>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
+              <MainMap />
             </Grid>
           </Grid>
           <Box pt={4}>

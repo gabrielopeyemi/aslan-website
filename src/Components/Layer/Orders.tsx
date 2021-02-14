@@ -1,29 +1,16 @@
-import React from 'react';
-import Link from '@material-ui/core/Link';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
+import { MAINURL } from '../../Assets/Data';
+import axios from 'axios';
+import moment from 'moment';
 
 // Generate Order Data
-function createData(id: number, date: string, name: string, shipTo: string, paymentMethod: string, recieverName: string) {
-  return { id, date, name, shipTo, paymentMethod, recieverName };
-}
 
-const rows = [
-  createData(0, '16 Mar, 2019', 'Spencer Ayodele John', 'Tupelo, MS', 'VISA ⠀•••• 3719', 'Enietan Emmanuel'),
-  createData(1, '16 Mar, 2019', 'Opeyemi Mofeoluwa Adeniran', 'London, UK', 'VISA ⠀•••• 2574', 'Ibrahim Olammy'),
-  createData(2, '16 Mar, 2019', 'Ruth Ekwere', 'Boston, MA', 'MC ⠀•••• 1253', 'Ayoade Foluso Omowumi'),
-  createData(3, '16 Mar, 2019', 'Oyeniyi Benson Orire', 'Gary, IN', 'AMEX ⠀•••• 2000', 'Joshua Adebayo'),
-  createData(4, '15 Mar, 2019', 'Charles Durugo', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 'Joshua Adebayo'),
-];
+  
 
-function preventDefault(event: { preventDefault: () => void; }) {
-  event.preventDefault();
-}
+
+
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -31,38 +18,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders() {
+export default function  Orders() {
+  const [rows, setRows] = useState<any>([]);
+  
+  function preventDefault(event: { preventDefault: () => void; }) {
+    event.preventDefault();
+  }
+  const datarow = rows.map((row: any, i: number) => (
+        <div className="card text-left" style={{marginBottom: '10px'}}>  
+          <div className="card-body">
+            <h4 className="card-title">{row.cargoID}</h4>
+            <div className="row">
+              <div className="col-md-6">SenderName: {row.senderName}</div>
+              <div className="col-md-6">RecieverName: {row.recieverName}</div>
+            </div>
+            <br/>
+            <div className="row">
+              <div className="col-md-6">SenderName: {row.senderName}</div>
+              <div className="col-md-6">created: {moment(row.createdAt).startOf('hour').fromNow()}</div>
+            </div>
+          </div>
+        </div>
+      ))
   const classes = useStyles();
+  useEffect(() => {
+    getTransactions();
+  }, [])
+  const getTransactions = async () => {
+    try {
+      const res = await axios.get(`${MAINURL}/transactions`);
+      console.log(res.data.data)
+      setRows(res.data.data)
+    } catch (err) {
+      console.log({Error: err})
+   }
+  }
   return (
     <React.Fragment>
       <Title>Recent Orders</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Sender Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Reciever Name</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.recieverName}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link>
-      </div>
+      {datarow}
     </React.Fragment>
   );
 }
